@@ -9,7 +9,7 @@
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
-                text-align: center;
+                text-align: center; 
             }
             .mbl {
                 display: inline-block;
@@ -42,7 +42,7 @@
                 box-shadow: 0px 0px 20px #000;
                 margin-top: 10px;
                 width: 98%;
-                height: 70px;
+                height: 60px;
                 z-index: 999;
             }
             .top:hover{
@@ -73,12 +73,54 @@
                 background: rgba(14, 14, 14, 0.92);
                 border-radius: 20px;
             }
+            .time {
+                text-shadow: 0px 6px 4px #000;
+            }
         </style>
+        <script>
+            function backTop() {
+                window.scrollBy(0, -100);
+                scrolldelay = setTimeout('backTop()', 30);
+                if(document.documentElement.scrollTop == 0) clearTimeout(scrolldelay);
+            }  
+            setInterval(datatime, 1000);
+        </script>
     </head>
     <header>
         <div class = "top">
+            <script>
+                function Time() {
+                    var today = new Date();
+                    var yyyy = today.getFullYear();
+                    var MM = today.getMonth() + 1;
+                    var dd = today.getDate();
+                    var hh = today.getHours();
+                    var mm = today.getMinutes();
+                    var ss = today.getSeconds();
+                    MM = checkTime(MM);
+                    dd = checkTime(dd);
+                    mm = checkTime(mm);
+                    ss = checkTime(ss);
+                    var day;
+                    if (today.getDay() == 0) day = " Sunday"
+                    if (today.getDay() == 1) day = " Monday"
+                    if (today.getDay() == 2) day = " Tuesday"
+                    if (today.getDay() == 3) day = " Wednesday"
+                    if (today.getDay() == 4) day = " Thursday"
+                    if (today.getDay() == 5) day = " Friday"
+                    if (today.getDay() == 6) day = " Saturday"
+                    document.getElementById('nowDateTimeSpan').innerHTML = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  "+ day;
+                    setTimeout('Time()', 1000);
+                }
+                function checkTime(x) {
+                    if (x < 10) x = "0" + x;
+                    return x;
+                }
+            </script>
+            <body class = "time" onload = "Time()" style = "color: rgb(255, 255, 255);">
+                <font style = "font-size: 240%;">Time : <span id = "nowDateTimeSpan"></span></font>
+            </body>
         </div>
-        <br>
         <br>
         <br>
         <br>
@@ -95,12 +137,5 @@
         </div>
         
         <div class = "fot" onclick = "backTop()"></div>
-        <script>
-        function backTop() {
-            window.scrollBy(0, -100);
-            scrolldelay = setTimeout('backTop()', 30);
-            if(document.documentElement.scrollTop == 0) clearTimeout(scrolldelay);
-        }  
-        </script>
     </body>
 </html>
